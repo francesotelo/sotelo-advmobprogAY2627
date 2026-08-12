@@ -1,0 +1,4 @@
+## Lab Activity 1: Discussion
+
+*   **setState (Ephemeral State):** Ephemeral state is short-lived and only impacts a specific widget or localized part of the user interface. In this application, `setState` is utilized on the first screen to handle the counter value, as the integer only matters to the `MyHomePage` widget and resets upon rebuilding. 
+*   **Provider (App State):** App state refers to long-lived state that impacts the entire application or significant portions of the UI. We use the `provider` package alongside `ChangeNotifier` to manage the theme. This ensures that when the user toggles between light and dark mode on the second screen, the visual preferences persist and update globally across all active screens.
