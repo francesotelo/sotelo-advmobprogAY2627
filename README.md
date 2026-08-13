@@ -1,4 +1,10 @@
-## Lab Activity 1: Discussion
+## Lab Activity 2: Discussion
 
-*   **setState (Ephemeral State):** Ephemeral state is short-lived and only impacts a specific widget or localized part of the user interface. In this application, `setState` is utilized on the first screen to handle the counter value, as the integer only matters to the `MyHomePage` widget and resets upon rebuilding. 
-*   **Provider (App State):** App state refers to long-lived state that impacts the entire application or significant portions of the UI. We use the `provider` package alongside `ChangeNotifier` to manage the theme. This ensures that when the user toggles between light and dark mode on the second screen, the visual preferences persist and update globally across all active screens.
+In this activity, the application relies on a clear separation of concerns using a Model-View-Controller (MVC) inspired architecture combined with the Provider pattern for state management. 
+
+- **Model (`product.dart`)**: Represents the data structure for the items retrieved from the API endpoint. It parses raw JSON data into strongly-typed Dart objects.
+- **Service (`product_service.dart`)**: Handles the core business logic of data fetching. It interacts with the external API over HTTP to fetch the product list and converts the HTTP response using the Model.
+- **Screens (`product_screen.dart`, `home_screen.dart`)**: Serve as the Views. They consume the data provided by the Future resolved from the Service layer and present it visually to the user.
+- **Provider (`theme_provider.dart`)**: Manages the application's global state (like the dark/light mode toggle). The Screens listen to changes in this provider to dynamically rebuild the UI when state changes occur.
+
+This design pattern ensures that UI components remain decoupled from API integration logic, making the code much easier to read, maintain, and scale for future laboratory tasks.
