@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'product_screen.dart';
+import 'cart_screen.dart';
 import 'settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   final PageController pageController = PageController();
+  bool _showFab = true;
 
   @override
   Widget build(BuildContext context) {
@@ -29,25 +31,36 @@ class _HomeScreenState extends State<HomeScreen> {
           onPageChanged: (page) {
             setState(() {
               selectedIndex = page;
+              _showFab = selectedIndex != 1;
             });
           },
-          children: const [
+          children: [
             ProductScreen(),
+            CartScreen(),
             SettingsScreen(),
           ],
         ),
+        floatingActionButton: _showFab
+            ? FloatingActionButton(
+                onPressed: () {},
+                backgroundColor: Theme.of(context).primaryColor,
+                child: const Icon(Icons.chat),
+              )
+            : null,
         bottomNavigationBar: BottomNavigationBar(
           showSelectedLabels: true,
           showUnselectedLabels: false,
           onTap: (int value) {
             setState(() {
               selectedIndex = value;
+              _showFab = selectedIndex != 1;
               pageController.jumpToPage(value);
             });
           },
           currentIndex: selectedIndex,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.shop), label: 'Shop'),
+            BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
             BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
           ],
         ),

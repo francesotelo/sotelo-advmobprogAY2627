@@ -1,10 +1,8 @@
-## Lab Activity 2: Discussion
+## Lab Activity 3: Discussion
 
-In this activity, the application relies on a clear separation of concerns using a Model-View-Controller (MVC) inspired architecture combined with the Provider pattern for state management. 
+In this activity, the Cart endpoint was integrated successfully, relying on the MVC-inspired structure.
 
-- **Model (`product.dart`)**: Represents the data structure for the items retrieved from the API endpoint. It parses raw JSON data into strongly-typed Dart objects.
-- **Service (`product_service.dart`)**: Handles the core business logic of data fetching. It interacts with the external API over HTTP to fetch the product list and converts the HTTP response using the Model.
-- **Screens (`product_screen.dart`, `home_screen.dart`)**: Serve as the Views. They consume the data provided by the Future resolved from the Service layer and present it visually to the user.
-- **Provider (`theme_provider.dart`)**: Manages the application's global state (like the dark/light mode toggle). The Screens listen to changes in this provider to dynamically rebuild the UI when state changes occur.
-
-This design pattern ensures that UI components remain decoupled from API integration logic, making the code much easier to read, maintain, and scale for future laboratory tasks.
+- **Model (`cart.dart`)**: Data structures `Cart` and `CartProduct` were created to accurately parse the JSON objects returned by the API endpoint.
+- **Service (`cart_service.dart`)**: To fulfill the requirement of rendering only one user cart via `getById`, the `/carts/user/:id` endpoint was implemented. This isolates the HTTP request logic, safely returning the parsed data payload to the UI. The `addToCart` POST request is similarly abstracted here.
+- **Screen (`cart_screen.dart`)**: Uses a `FutureBuilder` to fetch and render the user's cart asynchronously. To fulfill Enhancement 1, tapping a cart item queries `ProductService().getProductById()` to fetch full specifications, then routes directly to the shared `ProductDetailsScreen` without duplicating UI code.
+- **State Updates (`home_screen.dart`)**: Added a FloatingActionButton that selectively hides based on the active tab index (Enhancement 2).

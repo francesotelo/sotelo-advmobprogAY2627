@@ -10,7 +10,6 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.all(16.r),

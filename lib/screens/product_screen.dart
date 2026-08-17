@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../models/product.dart';
+import '../services/cart_service.dart';
 import '../services/product_service.dart';
 import '../widgets/custom_text.dart';
 
@@ -71,7 +72,6 @@ class _ProductScreenState extends State<ProductScreen> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 }
-
                 if (snapshot.hasError) {
                   return Center(
                     child: CustomText(
@@ -80,7 +80,6 @@ class _ProductScreenState extends State<ProductScreen> {
                     ),
                   );
                 }
-
                 if (_filteredProducts.isEmpty) {
                   return Center(
                     child: CustomText(
@@ -89,7 +88,6 @@ class _ProductScreenState extends State<ProductScreen> {
                     ),
                   );
                 }
-
                 return GridView.builder(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   itemCount: _filteredProducts.length,
@@ -168,6 +166,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
 class ProductDetailsScreen extends StatelessWidget {
   final Product product;
+  final int dummyUserId = 5;
 
   const ProductDetailsScreen({super.key, required this.product});
 
@@ -219,6 +218,55 @@ class ProductDetailsScreen extends StatelessWidget {
                     text: product.description,
                     fontSize: 14.sp,
                     maxLines: 10,
+                  ),
+                  SizedBox(height: 24.h),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50.h,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                      ),
+                      onPressed: () async {
+                        try {
+                          await CartService().addToCart(dummyUserId, product.id, 1);
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: CustomText(
+                                  text: '${product.title} added to cart!',
+                                  color: Colors.white,
+                                  fontSize: 14.sp,
+                                ),
+                                backgroundColor: Colors.green,
+                              ),
+                            );
+                          }
+                        } catch (e) {
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: CustomText(
+                                  text: 'Failed to add to cart.',
+                                  color: Colors.white,
+                                  fontSize: 14.sp,
+                                ),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
+                        }
+                      },
+                      child: CustomText(
+                        text: 'Add to Cart',
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ],
               ),

@@ -7,8 +7,8 @@ class ThemeProvider with ChangeNotifier {
 
   ThemeData get lightTheme => ThemeData(
         brightness: Brightness.light,
-        primaryColor: const Color(0xFFFFC0CB), 
-        scaffoldBackgroundColor: const Color(0xFFF3E5F5), 
+        primaryColor: const Color(0xFFFFC0CB),
+        scaffoldBackgroundColor: const Color(0xFFF3E5F5),
         appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xFFFFC0CB),
           foregroundColor: Colors.black87,
@@ -16,7 +16,7 @@ class ThemeProvider with ChangeNotifier {
         ),
         colorScheme: const ColorScheme.light(
           primary: Color(0xFFFFC0CB),
-          secondary: Color(0xFFFFF59D), 
+          secondary: Color(0xFFFFF59D),
           surface: Colors.white,
         ),
         cardColor: Colors.white,
