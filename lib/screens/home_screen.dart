@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'product_screen.dart';
 import 'cart_screen.dart';
-import 'settings_screen.dart';
+import 'profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,7 +23,10 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Image.asset('assets/images/nubdexchange_logo.png', scale: 1.5),
+          title: Image.asset(
+            'assets/images/nubdexchange_logo.png',
+            scale: 1.5,
+          ),
         ),
         body: PageView(
           physics: const NeverScrollableScrollPhysics(),
@@ -37,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             ProductScreen(),
             CartScreen(),
-            SettingsScreen(),
+            ProfileScreen(),
           ],
         ),
         floatingActionButton: _showFab
@@ -59,9 +62,18 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           currentIndex: selectedIndex,
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.shop), label: 'Shop'),
-            BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
-            BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shop),
+              label: 'Shop',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              label: 'Cart',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            ),
           ],
         ),
       ),

@@ -1,8 +1,7 @@
-## Lab Activity 3: Discussion
+## Lab Activity 4: Discussion
 
-In this activity, the Cart endpoint was integrated successfully, relying on the MVC-inspired structure.
+This activity expanded the architecture by integrating a `UserService` to manage authentication and user sessions locally using `SharedPreferences`. 
 
-- **Model (`cart.dart`)**: Data structures `Cart` and `CartProduct` were created to accurately parse the JSON objects returned by the API endpoint.
-- **Service (`cart_service.dart`)**: To fulfill the requirement of rendering only one user cart via `getById`, the `/carts/user/:id` endpoint was implemented. This isolates the HTTP request logic, safely returning the parsed data payload to the UI. The `addToCart` POST request is similarly abstracted here.
-- **Screen (`cart_screen.dart`)**: Uses a `FutureBuilder` to fetch and render the user's cart asynchronously. To fulfill Enhancement 1, tapping a cart item queries `ProductService().getProductById()` to fetch full specifications, then routes directly to the shared `ProductDetailsScreen` without duplicating UI code.
-- **State Updates (`home_screen.dart`)**: Added a FloatingActionButton that selectively hides based on the active tab index (Enhancement 2).
+- **State & Flow**: The application now routes through a `splash_screen` which checks for a persistent authentication token. If present, the user bypasses the login flow and proceeds directly to the main application. 
+- **User Model & Profile UI**: The `user.dart` model successfully captures the JSON payload from the `/auth/login` endpoint. This data is read dynamically on the `profile_screen` to populate the user's avatar, metadata, and handles session termination via the logout function.
+- **Dynamic Cart Integration**: The `cart_screen` now fetches the user's ID stored in `SharedPreferences` during its initialization, dynamically requesting the specific cart associated with the logged-in user rather than relying on a hardcoded ID.
