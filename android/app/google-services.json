@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1080127763169",
+    "project_id": "advmobprog-firebase-26e85",
+    "storage_bucket": "advmobprog-firebase-26e85.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080127763169:android:c1fe9645722a0408bdfda0",
+        "android_client_info": {
+          "package_name": "com.example.sotelo_advmobprog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080127763169-9nakiaumni4qnm8kqjpoj77cmnvm90ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_v_tB8OfMxLDqTCA5B35Ckngl48AOQlE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080127763169-9nakiaumni4qnm8kqjpoj77cmnvm90ul.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1080127763169-5v4nb2395ap8sbglab37upbsfklp0nci.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.soteloAdvmobprog"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

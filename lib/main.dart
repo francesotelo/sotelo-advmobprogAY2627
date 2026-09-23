@@ -4,6 +4,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+// Firebase imports
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
 import 'screens/splash_screen.dart';
 import 'screens/signin_screen.dart';
 import 'screens/home_screen.dart';
@@ -12,6 +16,11 @@ import 'providers/theme_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -42,9 +51,7 @@ class SoteloAdvMobProg extends StatelessWidget {
             title: 'E-Commerce App',
             theme: themeModel.lightTheme,
             darkTheme: themeModel.darkTheme,
-            themeMode: themeModel.isDark
-                ? ThemeMode.dark
-                : ThemeMode.light,
+            themeMode: themeModel.isDark ? ThemeMode.dark : ThemeMode.light,
 
             // Updated routes
             initialRoute: '/splash',

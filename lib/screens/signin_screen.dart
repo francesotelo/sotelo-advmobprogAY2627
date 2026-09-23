@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../services/user_service.dart';
 import '../widgets/custom_text.dart';
+import 'signup_screen.dart'; // Make sure this import is here!
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -24,6 +25,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
     if (_formKey.currentState!.validate()) {
       try {
+        // DummyJSON Login
         final response = await userService.loginUser(
           _usernameController.text,
           _passwordController.text,
@@ -37,12 +39,25 @@ class _SigninScreenState extends State<SigninScreen> {
         Navigator.pushReplacementNamed(context, '/home', arguments: response);
       } catch (e) {
         if (!mounted) return;
-        setState(() {
-          _isLoading = false;
-        });
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Login failed: ${e.toString()}')),
-        );
+
+        // If DummyJSON fails, try Firebase Login fallback (Optional enhancement)
+        try {
+          await userService.signIn(
+            email: _usernameController.text, // Firebase uses email
+            password: _passwordController.text,
+          );
+          setState(() {
+            _isLoading = false;
+          });
+          Navigator.pushReplacementNamed(context, '/home');
+        } catch (firebaseError) {
+          setState(() {
+            _isLoading = false;
+          });
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Login failed: ${e.toString()}')),
+          );
+        }
       }
     } else {
       setState(() {
@@ -71,7 +86,7 @@ class _SigninScreenState extends State<SigninScreen> {
                   TextFormField(
                     controller: _usernameController,
                     decoration: InputDecoration(
-                      labelText: 'Username',
+                      labelText: 'Username or Email',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.r),
                       ),
@@ -110,6 +125,24 @@ class _SigninScreenState extends State<SigninScreen> {
                               fontSize: 16.sp,
                               fontWeight: FontWeight.bold,
                             ),
+                    ),
+                  ),
+                  SizedBox(height: 16.h),
+                  // New Sign Up Navigation Button
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignupScreen(),
+                        ),
+                      );
+                    },
+                    child: CustomText(
+                      text: "Don't have an account? Sign Up",
+                      color: const Color(0xFF3949AB),
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ],
