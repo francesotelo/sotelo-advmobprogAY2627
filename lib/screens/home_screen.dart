@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'product_screen.dart';
 import 'cart_screen.dart';
 import 'profile_screen.dart';
+import 'chat_screen.dart'; // Added import for ChatScreen
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -45,9 +46,17 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         floatingActionButton: _showFab
             ? FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  // Added navigation to redirect to the Chat List UI
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ChatScreen(),
+                    ),
+                  );
+                },
                 backgroundColor: Theme.of(context).primaryColor,
-                child: const Icon(Icons.chat),
+                child: const Icon(Icons.chat, color: Colors.white),
               )
             : null,
         bottomNavigationBar: BottomNavigationBar(
